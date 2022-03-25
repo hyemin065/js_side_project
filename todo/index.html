@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <title>To do list</title>
+    <style>
+      .wrap {
+        background-color: skyblue;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .todo_box {
+        width: 500px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 20px 0 40px;
+      }
+      .todo_box > div {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+      .todo_box input[type="text"] {
+        width: 70%;
+        border: 1px solid skyblue;
+        height: 40px;
+        box-sizing: border-box;
+      }
+      .todo_box button {
+        width: 40px;
+        height: 40px;
+        background-color: skyblue;
+        color: #fff;
+        font-size: 20px;
+        border: none;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      .content {
+        margin-top: 10px;
+        flex-direction: column;
+        padding: 0 40px;
+      }
+      .item {
+        border: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .item p {
+        margin: 0;
+        line-height: 40px;
+      }
+      .item input[type="text"] {
+        display: none;
+      }
+      .item button {
+        font-size: 12px;
+      }
+      .edit_buttons {
+        display: none;
+      }
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+      }
+      .todo_list_item.red {
+        color: red;
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="todo_box">
+        <h1>TO DO LIST</h1>
+        <div class="header">
+          <form action="" class="todo_form">
+            <input type="text" class="todo_input" />
+            <button type="submit" class="submit">+</button>
+            <button type="button" class="clearAll">clearAll</button>
+          </form>
+        </div>
+        <div class="content"></div>
+      </div>
+    </div>
+    <script src="todo.js"></script>
+  </body>
+</html>
