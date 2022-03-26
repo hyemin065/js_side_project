@@ -3,33 +3,31 @@ const todoInput = document.querySelector(".todo_input");
 const submitBtn = document.querySelector(".submit");
 const content = document.querySelector(".content");
 const clearBtn = document.querySelector(".clearAll");
-
 let itemsArray = localStorage.getItem("items")
   ? JSON.parse(localStorage.getItem("items"))
   : [];
 
-console.log(itemsArray);
-localStorage.setItem("items", JSON.stringify(itemsArray));
-
 //todo 만들기
-const createTodo = (text) => {
-  console.log(text);
+const createTodo = (e) => {
+  e.preventDefault();
   const todoItem = document.createElement("div");
   const item = content.appendChild(todoItem);
   todoItem.classList.add("item");
   item.innerHTML = `
-  <p class="todo_list_item">${text}</p>
-  <input type="text" class="edit_input" value="${text}">
-  <div class="contents_buttons">
-    <button type="button" class="complete">완료</button>
-    <button type="button" class="edit">수정</button>
-    <button type="button" class="remove">삭제</button>
-  </div>
-    <div class="edit_buttons">
-    <button type="button" class="confirm">확인</button>
-    <button type="button" class="close">취소</button>
-  </div>
+    <p class="todo_list_item">${todoInput.value}</p>
+    <input type="text" class="edit_input" value="${todoInput.value}">
+    <div class="contents_buttons">
+      <button type="button" class="complete">완료</button>
+      <button type="button" class="edit">수정</button>
+      <button type="button" class="remove">삭제</button>
+    </div>
+      <div class="edit_buttons">
+      <button type="button" class="confirm">확인</button>
+      <button type="button" class="close">취소</button>
+    </div>
   `;
+
+  submitLocalStorage(todoInput.value);
 };
 
 //todo 수정
@@ -82,13 +80,11 @@ const completeTodo = (e) => {
 };
 
 //로컬스토리지에 저장
-const submitLocalStorage = (e) => {
-  e.preventDefault();
+const submitLocalStorage = (text) => {
+  console.log(text);
   itemsArray.push(todoInput.value);
-  console.log(itemsArray);
   localStorage.setItem("items", JSON.stringify(itemsArray));
-  console.log(localStorage.getItem("items"));
-  createTodo(todoInput.value);
+  // createTodo(todoInput.value);
   todoInput.value = "";
 };
 
@@ -102,16 +98,12 @@ const clearLocalStorage = () => {
 };
 
 const init = () => {
-  itemsArray.forEach((item) => {
-    console.log(item);
-    createTodo(item);
-  });
-  clearBtn.addEventListener("click", clearLocalStorage);
-  form.addEventListener("submit", submitLocalStorage);
   submitBtn.addEventListener("click", createTodo);
+  clearBtn.addEventListener("click", clearLocalStorage);
   content.addEventListener("click", editTodoMode);
   content.addEventListener("click", removeTodo);
   content.addEventListener("click", completeTodo);
+  // form.addEventListener("submit", submitLocalStorage);
 };
 
 init();
