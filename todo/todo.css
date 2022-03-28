@@ -1,0 +1,78 @@
+.wrap {
+  background-color: skyblue;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.todo_box {
+  width: 500px;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px 0 40px;
+}
+.todo_box > div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.todo_box > div form {
+  display: flex;
+}
+.todo_box input[type="text"] {
+  width: 70%;
+  border: 1px solid skyblue;
+  height: 40px;
+  box-sizing: border-box;
+}
+.todo_box button {
+  width: 100px;
+  height: 40px;
+  background-color: skyblue;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.content {
+  margin-top: 10px;
+  flex-direction: column;
+  padding: 0 40px;
+}
+.content button {
+  width: 40px;
+}
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 395px;
+  margin: 0 auto;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+.item p {
+  margin: 0;
+  line-height: 40px;
+}
+.item input[type="text"] {
+  display: none;
+}
+.item button {
+  font-size: 12px;
+}
+.edit_buttons {
+  display: none;
+}
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+.todo_list_item.red {
+  color: red;
+  text-decoration: line-through;
+}

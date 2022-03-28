@@ -10,8 +10,10 @@ let itemsArray = localStorage.getItem("items")
 //todo 만들기
 const createTodo = (e) => {
   e.preventDefault();
+
   const todoItem = document.createElement("div");
   const item = content.appendChild(todoItem);
+  todoItem.id = Math.floor(Math.random() * 100);
   todoItem.classList.add("item");
   item.innerHTML = `
     <p class="todo_list_item">${todoInput.value}</p>
@@ -26,8 +28,7 @@ const createTodo = (e) => {
       <button type="button" class="close">취소</button>
     </div>
   `;
-
-  submitLocalStorage(todoInput.value);
+  submitLocalStorage(todoInput.value, todoItem.id);
 };
 
 //todo 수정
@@ -59,15 +60,30 @@ const editTodoMode = (e) => {
     editBtn.style.display = "none";
     todoListItem.style.display = "block";
     editInput.style.display = "none";
+    let editArr = itemsArray.map((item) => {
+      console.log("item", item.id, "items", items);
+      if (item.id == items.id) {
+        item.text = editInput.value;
+      }
+    });
+
+    localStorage.setItem("items", JSON.stringify(editArr));
   }
 };
 
 //todo 지우기
 const removeTodo = (e) => {
   const items = e.target.closest(".item");
+  const editInput = items.querySelector(".edit_input");
+
   if (e.target.className === "remove") {
     items.remove();
+    let idx = itemsArray.findIndex((item) => {
+      return item.text == editInput.value;
+    });
+    itemsArray.splice(idx, 1);
   }
+  localStorage.setItem("items", JSON.stringify(itemsArray));
 };
 
 //todo 완료
@@ -80,11 +96,13 @@ const completeTodo = (e) => {
 };
 
 //로컬스토리지에 저장
-const submitLocalStorage = (text) => {
-  console.log(text);
-  itemsArray.push(todoInput.value);
+const submitLocalStorage = (text, id) => {
+  itemsArray.map((item) => {
+    item.text == text;
+  });
+  itemsArray.push({ text: text, id: id });
   localStorage.setItem("items", JSON.stringify(itemsArray));
-  // createTodo(todoInput.value);
+
   todoInput.value = "";
 };
 
@@ -97,13 +115,35 @@ const clearLocalStorage = () => {
   }
 };
 
+const getTodo = () => {
+  itemsArray.map((items) => {
+    const todoItem = document.createElement("div");
+    const item = content.appendChild(todoItem);
+    todoItem.id = items.id;
+    todoItem.classList.add("item");
+    item.innerHTML = `
+    <p class="todo_list_item">${items.text}</p>
+    <input type="text" class="edit_input" value="${items.text}">
+    <div class="contents_buttons">
+      <button type="button" class="complete">완료</button>
+      <button type="button" class="edit">수정</button>
+      <button type="button" class="remove">삭제</button>
+    </div>
+      <div class="edit_buttons">
+      <button type="button" class="confirm">확인</button>
+      <button type="button" class="close">취소</button>
+    </div>
+  `;
+  });
+};
+
 const init = () => {
+  document.addEventListener("DOMContentLoaded", getTodo);
   submitBtn.addEventListener("click", createTodo);
   clearBtn.addEventListener("click", clearLocalStorage);
   content.addEventListener("click", editTodoMode);
   content.addEventListener("click", removeTodo);
   content.addEventListener("click", completeTodo);
-  // form.addEventListener("submit", submitLocalStorage);
 };
 
 init();
