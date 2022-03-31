@@ -60,14 +60,14 @@ const editTodoMode = (e) => {
     editBtn.style.display = "none";
     todoListItem.style.display = "block";
     editInput.style.display = "none";
-    let editArr = itemsArray.map((item) => {
-      console.log("item", item.id, "items", items);
+    itemsArray.map((item) => {
       if (item.id == items.id) {
         item.text = editInput.value;
+      } else {
+        item.text;
       }
+      return item.text;
     });
-
-    localStorage.setItem("items", JSON.stringify(editArr));
   }
 };
 
@@ -97,9 +97,6 @@ const completeTodo = (e) => {
 
 //로컬스토리지에 저장
 const submitLocalStorage = (text, id) => {
-  itemsArray.map((item) => {
-    item.text == text;
-  });
   itemsArray.push({ text: text, id: id });
   localStorage.setItem("items", JSON.stringify(itemsArray));
 
